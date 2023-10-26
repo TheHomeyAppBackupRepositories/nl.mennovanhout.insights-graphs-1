@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "nl.mennovanhout.insights-graphs",
-  "version": "1.0.0",
+  "version": "2.0.3",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -12,8 +12,8 @@
     "nl": "Insights Grafieken"
   },
   "description": {
-    "en": "Adds support to generate graphs for insights as image",
-    "nl": "Voegt ondersteuning toe om grafieken te genereren voor inzichten als afbeelding"
+    "en": "Generate graphs/images of your favourite sensors and devices",
+    "nl": "Genereer grafieken/afbeeldingen van je favoriete sensoren en apparaten"
   },
   "category": [
     "tools"
@@ -22,17 +22,19 @@
     "homey:manager:api"
   ],
   "images": {
-    "small": "/assets/images/small.jpg",
-    "large": "/assets/images/large.jpg",
-    "xlarge": "/assets/images/xlarge.jpg"
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
   },
   "support": "mailto:info@mennovanhout.nl",
   "homeyCommunityTopicId": 86856,
   "contributors": {
     "developers": [
       {
-        "name": "Léon van der Linden",
-        "email": "homey@vdlinden.xyz"
+        "name": "Léon van der Linden"
+      },
+      {
+        "name": "Bas van der Ploeg"
       }
     ],
     "translators": [
@@ -47,6 +49,7 @@
   "author": {
     "name": "Menno van Hout"
   },
+  "source": "https://github.com/mennovanhout/homey-insights-graphs",
   "brandColor": "#333333",
   "homepage": "https://mennovanhout.nl",
   "contributing": {
@@ -64,8 +67,8 @@
           "nl": "maak grafiek afbeelding"
         },
         "titleFormatted": {
-          "en": "create [[type]] graph of [[device]] [[resolution]] with line color [[lineColor]] in dark mode [[darkMode]]",
-          "nl": "maak [[type]] grafiek van [[device]] [[resolution]] met lijnkleur [[lineColor]] in donkere modus [[darkMode]]"
+          "en": "Create [[type]] graph of [[device]] [[resolution]] with line color [[lineColor]] in [[darkModeType]] as [[filename]]",
+          "nl": "Maak [[type]] grafiek van [[device]] [[resolution]] met lijnkleur [[lineColor]] in [[darkModeType]] als [[filename]]"
         },
         "args": [
           {
@@ -224,11 +227,42 @@
             }
           },
           {
-            "type": "checkbox",
-            "name": "darkMode",
+            "name": "darkModeType",
+            "type": "dropdown",
             "title": {
-              "en": "Dark Mode",
-              "nl": "Donkere modus"
+              "en": "Color Mode",
+              "nl": "Kleurmodus"
+            },
+            "values": [
+              {
+                "id": "transparant",
+                "title": {
+                  "en": "Transparent Mode",
+                  "nl": "Transparante modus"
+                }
+              },
+              {
+                "id": "darkmode",
+                "title": {
+                  "en": "Dark Mode",
+                  "nl": "Donkere modus"
+                }
+              },
+              {
+                "id": "lightmode",
+                "title": {
+                  "en": "Light Mode",
+                  "nl": "Lichte modus"
+                }
+              }
+            ]
+          },
+          {
+            "name": "filename",
+            "type": "text",
+            "title": {
+              "en": "Filename",
+              "nl": "Bestandsnaam"
             }
           }
         ],

@@ -4,10 +4,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dayjs_1 = __importDefault(require("dayjs"));
+const utc_1 = __importDefault(require("dayjs/plugin/utc"));
+const timezone_1 = __importDefault(require("dayjs/plugin/timezone"));
+dayjs_1.default.extend(utc_1.default);
+dayjs_1.default.extend(timezone_1.default);
 class LogNormaliser {
-    constructor(logs, resolution) {
+    constructor(logs, resolution, timezone) {
         this.logs = logs;
         this.resolution = resolution;
+        this.timezone = timezone;
     }
     getNormalisedLogs() {
         let labelFormat = 'HH:MM';
@@ -45,7 +50,7 @@ class LogNormaliser {
                 labelFormat = 'MMM YYYY';
         }
         const combinedLogs = this.logs.values.reduce((acc, log) => {
-            const date = (0, dayjs_1.default)(log.t);
+            let date = (0, dayjs_1.default)(log.t);
             const dateFormatted = date.format(loopFormat);
             if (!acc[dateFormatted]) {
                 acc[dateFormatted] = [];
@@ -64,7 +69,7 @@ class LogNormaliser {
                 return acc;
             }, { t: '', v: -999999 });
             values.push({
-                t: (0, dayjs_1.default)(highestLog.t).format(labelFormat),
+                t: (0, dayjs_1.default)(highestLog.t).tz(this.timezone).format(labelFormat),
                 v: highestLog.v
             });
         });
